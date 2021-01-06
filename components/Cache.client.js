@@ -1,6 +1,6 @@
 import { createFromFetch } from 'react-server-dom-webpack'
 
-const endpoint = process.env.NEXT_PUBLIC_ENDPOINT
+const endpoint = 'http://localhost:3000'
 
 const cache = new Map()
 

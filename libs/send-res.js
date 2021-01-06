@@ -1,7 +1,7 @@
 import { pipeToNodeWritable } from 'react-server-dom-webpack/writer.node.server'
 
 import React from 'react'
-import App from '../components/App.server'
+import App from '../components/NewApp.server'
 
 let moduleMap
 const componentRegex = /components\/.+\.js/
@@ -46,10 +46,7 @@ module.exports = async (req, res, redirectToId, moduleMap) => {
 
   renderReactTree(
     {
-      selectedId: location.selectedId,
-      isEditing: location.isEditing,
-      searchText: location.searchText,
-      login: req.session.login || null,
+      name: location.name
     },
     res,
     moduleMap

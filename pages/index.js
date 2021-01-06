@@ -1,3 +1,3 @@
-import Root from '../components/Root.client'
+import Root from '../components/NewRoot.client'
 
 export default Root
