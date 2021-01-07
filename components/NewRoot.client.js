@@ -13,23 +13,6 @@ export default function Root() {
     </Suspense>
   )
 }
-/**
-function Content() {
-  const [location, setLocation] = useState({
-    selectedId: null,
-    isEditing: false,
-    searchText: '',
-  })
-  const response = useServerResponse(location)
-  const root = response.readRoot()
-
-  return (
-    <LocationContext.Provider value={[location, setLocation]}>
-      {root}
-    </LocationContext.Provider>
-  )
-}
-*/
 
 function Content() {
   const response = useServerResponse({name: "Anonymous"})
