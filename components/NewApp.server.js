@@ -2,6 +2,8 @@ import React, { Suspense } from 'react'
 import * as qna from '@tensorflow-models/qna';
 import Form from './Form.client'
 
+
+// borrow from https://sbfl.net/blog/2020/02/10/react-suspense-async/
 const wrapPromise = (promise) => {
   let status = 'pending';
   let result;
