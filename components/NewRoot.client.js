@@ -2,7 +2,7 @@ import { useState, Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { useServerResponse } from './Cache.client'
-import { LocationContext } from './LocationContext.client'
+import { InputContext } from './InputContext.client'
 
 export default function Root() {
   return (
@@ -15,9 +15,13 @@ export default function Root() {
 }
 
 function Content() {
-  const response = useServerResponse({name: "Anonymous"})
-  const root = response.readRoot()
-  return <div>{root}</div>
+  const [input, setInput] = useState({
+    passage: '',
+    question: '',
+  })
+  const response = useServerResponse(input)
+  const root = response.readRoot(response)
+  return <InputContext.Provider value={[input, setInput]}>{root}</InputContext.Provider>
 }
 
 function Error({ error }) {

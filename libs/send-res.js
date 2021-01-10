@@ -46,7 +46,8 @@ module.exports = async (req, res, redirectToId, moduleMap) => {
 
   renderReactTree(
     {
-      name: location.name
+      passage: location.passage,
+      question: location.question
     },
     res,
     moduleMap

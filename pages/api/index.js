@@ -8,6 +8,6 @@ export default async (req, res) => {
   if (req.method !== 'GET') {
     return res.send('Method not allowed.')
   }
-
+  console.log('GET')
   sendRes(req, res, null)
 }

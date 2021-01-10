@@ -1,49 +1,40 @@
-import React, { Suspense } from 'react'
-import * as qna from '@tensorflow-models/qna';
+import React, { Suspense, useState } from 'react'
+import * as qna from '@tensorflow-models/qna'
 import Form from './Form.client'
+import { wrapPromise } from './wrappromise'
+require('@tensorflow/tfjs-node')
 
-
-// borrow from https://sbfl.net/blog/2020/02/10/react-suspense-async/
-const wrapPromise = (promise) => {
-  let status = 'pending';
-  let result;
-
-  const suspender = promise.then(
-    (r) => {
-      status = 'fulfilled';
-      result = r;
-    },
-    (e) => {
-      status = 'rejected';
-      result = e;
-  });
-
-  const read = () => {
-    if(status === 'pending') {
-      throw suspender;
-    } else if(status === 'rejected') {
-      throw result;
-    } else {
-      return result;
-    }
-  };
-
-  return { read };
-}
-
-const loadModel = () => wrapPromise(qna.load())
-
+const getAnswer = (passage, question) => wrapPromise(
+  (async (passage, question) => {
+    const model = await qna.load()
+    const answer = await model.findAnswers(question, passage)
+    return answer
+  })(passage, question) 
+)
 const Error = () => <div>Waiting...</div>
 
-const QNA = () => {
-  const model = loadModel();
-  return <Form />
+const Answer = ({ wrappedAnswer }) => {
+  const answer = wrappedAnswer.read()
+  return <div>{JSON.stringify(answer)}</div>
+}
+
+const QNA = ({passage, question}) => {  
+  return (<div>
+    <Form />
+      <>
+      {passage !== ``?
+      <Suspense fallback={<Error />}>
+        <Answer wrappedAnswer={getAnswer(passage, question)}/>
+      </Suspense>: <div></div>
+      }
+      </>
+    </div>)
 } 
 
-export default function App({ name }) {
+export default function App({ passage, question }) {
   return (
-    <Suspense fallback={<Error />}>
-      <QNA />
-    </Suspense>
+      <Suspense fallback={<Error />}>
+        <QNA passage={passage} question={question}/>
+      </Suspense>
   )
 }

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { useLocation } from './InputContext.client'
 
 const Form = () => {
   const [question, setQuestion] = useState("")
   const [passage, setPassage] = useState("")
+  const [_, setInput] = useLocation()
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log("Hi! This is still under development:)")
+    setInput({passage, question})
   }
   return <form onSubmit={handleSubmit}>
     <label>Passage: 
