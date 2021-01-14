@@ -37,7 +37,7 @@ webpack(
     },
     stats: 'errors-only',
     target: 'node',
-    externals: [nodeExternals()]
+    externals: [nodeExternals()],
   },
   (err, stats) => {
     if (err) {

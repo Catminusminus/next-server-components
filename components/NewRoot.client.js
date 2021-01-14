@@ -21,7 +21,11 @@ function Content() {
   })
   const response = useServerResponse(input)
   const root = response.readRoot(response)
-  return <InputContext.Provider value={[input, setInput]}>{root}</InputContext.Provider>
+  return (
+    <InputContext.Provider value={[input, setInput]}>
+      {root}
+    </InputContext.Provider>
+  )
 }
 
 function Error({ error }) {
