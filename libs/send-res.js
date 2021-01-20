@@ -32,22 +32,9 @@ module.exports = async (req, res, redirectToId, moduleMap) => {
   console.time('react render')
   res.on('close', () => console.timeEnd('react render'))
 
-  let location
-  try {
-    location = JSON.parse(req.query.location)
-  } catch (err) {
-    return res.send('Missing parameter, skipped.')
-  }
-
-  if (redirectToId) {
-    location.selectedId = redirectToId
-  }
-  res.setHeader('X-Location', JSON.stringify(location))
-
   renderReactTree(
     {
-      passage: location.passage,
-      question: location.question,
+      answer: req.answer != null? req.answer: '',
     },
     res,
     moduleMap

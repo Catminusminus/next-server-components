@@ -17,7 +17,7 @@ export default function Root() {
 function Content() {
   const [input, setInput] = useState({
     passage: '',
-    question: '',
+    question: ''
   })
   const response = useServerResponse(input)
   const root = response.readRoot(response)

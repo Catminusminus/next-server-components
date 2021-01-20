@@ -32,7 +32,7 @@ webpack(
               plugins: ['@babel/transform-modules-commonjs'],
             },
           },
-        },
+        }
       ],
     },
     stats: 'errors-only',

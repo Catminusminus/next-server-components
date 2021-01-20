@@ -18,7 +18,7 @@ export function useServerResponse(location) {
     return response
   }
   response = createFromFetch(
-    fetch(endpoint + '/api?location=' + encodeURIComponent(key))
+    fetch(endpoint + '/api')
   )
   cache.set(key, response)
   return response

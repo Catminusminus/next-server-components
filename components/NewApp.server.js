@@ -2,7 +2,6 @@ import React, { Suspense, useState } from 'react'
 import * as qna from '@tensorflow-models/qna'
 import Form from './Form.client'
 import { wrapPromise } from './wrappromise'
-require('@tensorflow/tfjs-node')
 
 const getAnswer = (passage, question) =>
   wrapPromise(
@@ -19,8 +18,7 @@ const getAnswer = (passage, question) =>
   )
 const Error = () => <div>Waiting...</div>
 
-const Answer = ({ wrappedAnswer }) => {
-  const answer = wrappedAnswer.read()
+const Answer = ({ answer }) => {
   return (
     <>
       {answer.length ? (
@@ -43,14 +41,14 @@ const Answer = ({ wrappedAnswer }) => {
   )
 }
 
-const QNA = ({ passage, question }) => {
+const QNA = ({ answer }) => {
   return (
     <div>
       <Form />
       <>
-        {passage !== `` ? (
+        {answer !== `` ? (
           <Suspense fallback={<Error />}>
-            <Answer wrappedAnswer={getAnswer(passage, question)} />
+            <Answer answer={answer} />
           </Suspense>
         ) : (
           <div></div>
@@ -60,10 +58,10 @@ const QNA = ({ passage, question }) => {
   )
 }
 
-export default function App({ passage, question }) {
+export default function App({ answer }) {
   return (
     <Suspense fallback={<Error />}>
-      <QNA passage={passage} question={question} />
+      <QNA answer={answer} />
     </Suspense>
   )
 }
