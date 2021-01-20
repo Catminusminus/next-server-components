@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import '../style.css'
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css" />
         <title>React Server Components (Experimental Demo)</title>
         <meta httpEquiv="Content-Language" content="en" />
         <meta
