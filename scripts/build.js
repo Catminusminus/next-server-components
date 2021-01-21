@@ -23,7 +23,21 @@ webpack(
           },
         },
         {
-          test: /\.js$/,
+          test: /\.ts$/,
+          exclude: /(node_modules)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                '@babel/preset-react',
+                '@babel/preset-typescript']
+              ,
+              plugins: ['@babel/transform-modules-commonjs'],
+            },
+          },
+        },
+        {
+          test: /\.jsx?$/,
           exclude: /(node_modules)/,
           use: {
             loader: 'babel-loader',
